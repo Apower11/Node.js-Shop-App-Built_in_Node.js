@@ -1,0 +1,57 @@
+<%- include ("../includes/navigation.ejs") -%>
+
+    <main>
+        <h1>My Products</h1>
+        <p>List of all the products...</p>
+    </main>
+
+    <main>
+        <% if(prods.length > 0) { %>
+        <% for(let product of prods) { %>
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/<%= product.imageUrl %>">
+                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title"><%= product.title %></span>
+                        <span>£ <%= product.price %></span>
+                        <p> <%= product.description %></p>
+                        <br>
+                        <div class="buttons">
+                          <a href="/admin/edit-product/<%= product._id %>?edit=true" class="waves-effect waves-light btn">Edit</a>
+                          <input type="hidden" name="productId" value="<%= product._id %>">
+                          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                          <button onclick="deleteProduct(this)" type="button" class="waves-effect waves-light btn">Delete</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <% } %>
+        <% } else { %>
+          <h1>No Products</h1>
+        <% } %> 
+            
+      </main>
+      <ul class="pagination">
+        <% if (currentPage !== 1 && previousPage != 1) { %>
+           <li class="waves-effect"><a href="/product-list?page=1">1</a></li>
+        <% } %>
+        <% if(hasPreviousPage) { %>
+            <li class="waves-effect"><a href="/product-list?page=<%= previousPage %>"><%= previousPage %></a></li>
+        <% } %>
+           <li class="active"><a href="/product-list?page=<%= currentPage %>"><%= currentPage %></a></li>
+        <% if (hasNextPage) { %>
+            <li class="waves-effect"><a href="/product-list?page=<%= nextPage %>"><%= nextPage %></a></li>
+        <% } %>
+        <% if (lastPage !== currentPage && nextPage !== lastPage) { %>
+            <li class="waves-effect"><a class="waves-effect" href="/product-list?page=<%= lastPage %>"><%= lastPage %></a></li>
+        <% } %>
+      </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/admin.js"></script>
+    <%- include ("../includes/end.ejs") -%>

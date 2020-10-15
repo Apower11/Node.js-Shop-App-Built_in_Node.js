@@ -1,0 +1,31 @@
+<%- include("../includes/navigation.ejs") -%>
+<main>
+   <% if(errorMessage) { %>
+     <div><h5 id="error-message" class="center-align"><%= errorMessage %></h5></div>
+    <% } %>
+    <form action="/login" method="post" novalidate>
+           <div class="input-field col s6">
+            <input
+            class="<%= validationErrors.find(e => e.params = 'email') ? 'invalid' : '' %>"
+             id="email"
+             type="email"
+             name="email"
+             class="validate"
+             value="<%= oldInput.email %>">
+            <label for="email">Email</label>
+           </div>
+           <div class="input-field col s6">
+            <input
+            class="<%= validationErrors.find(e => e.params = 'password') ? 'invalid' : '' %>"
+            id="password" type="password" name="password" class="validate" value="<%= oldInput.password %>">
+            <label for="imageUrl">Password</label>
+           </div>
+           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn waves-effect waves-light" type="submit">Log In
+            <i class="material-icons right">add_box</i>
+          </button>
+          <a href="/reset">Reset Password</a>
+    </form>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<%- include ("../includes/end.ejs") -%>

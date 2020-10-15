@@ -1,0 +1,8 @@
+{
+    "env": {
+        "MONGO_USER": "apower11",
+        "MONGO_PASSWORD": "stomedy69",
+        "MONGO_DEFAULT_DATABASE": "test",
+        "STRIPE_KEY": "sk_test_QzPtI8tfgWJidDvOHQlhwrix009hUimU8K"
+    }
+}

@@ -1,0 +1,32 @@
+<%- include("../includes/navigation.ejs") -%>
+<main>
+   <% if(errorMessage) { %>
+    <div><h5 id="error-message" class="center-align"><%= errorMessage %></h5></div>
+   <% } %>
+    <form action="/signup" method="post" novalidate>
+           <div class="input-field col s6">
+            <input 
+            id="email"
+            class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>" 
+            type="email" 
+            name="email" 
+            class="validate" 
+            value="<%= oldInput.email %>">
+            <label for="email">Email</label>
+           </div>
+           <div class="input-field col s6">
+            <input class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"  id="password" type="password" name="password" class="validate" value="<%= oldInput.password %>">
+            <label for="Password">Password</label>
+           </div>
+           <div class="input-field col s6">
+            <input class="<%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"  id="confirmPassword" type="password" name="confirmPassword" class="validate" value="<%= oldInput.confirmPassword %>"> 
+            <label for="confirmPassword">Confirm Password</label>
+           </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn waves-effect waves-light" type="submit">Sign Up
+            <i class="material-icons right">add_box</i>
+          </button>
+    </form>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<%- include ("../includes/end.ejs") -%>
